@@ -2,6 +2,8 @@
 
 [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
 
+http://mattdesl.github.io/rust
+
 Experiments with THREE.js and glslify. Some glslify features:
 
 - vertex animations using glsl-noise and glsl-easings
