@@ -1,3 +1,6 @@
+import { polyfill } from 'es6-promise'
+polyfill()
+
 import THREE from 'three'
 import domready from 'domready'
 import viewer from './src/viewer'
