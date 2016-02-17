@@ -28,7 +28,7 @@ export default function(opt) {
   camera.position.copy(new THREE.Vector3(0, 0, -1.6))
   camera.lookAt(new THREE.Vector3())
   updateCamera()
-  
+
   app.render = renderer.render.bind(renderer, scene, camera)
 
   //render each frame unless user wants to do it manually
