@@ -14,15 +14,13 @@ import addBackground from './src/add-background'
 domready(() => { 
   const app = viewer({
     alpha: false,
+    canvas: document.querySelector('canvas'),
     preserveDrawingBuffer: false,
     antialias: true
   })
-  document.body.appendChild(app.canvas)
-  assign(document.body.style, {
-    background: '#000',
-    overflow: 'hidden'
-  })
 
+  setTimeout(() => app.canvas.style.display = 'block', 10)
+  
   const texOpt = { 
     minFilter: THREE.LinearFilter,
     generateMipmaps: false,
@@ -53,6 +51,9 @@ domready(() => {
     .then(null, (err) => {
       console.error("Got error")
       console.error(err.stack)
+    })
+    .then(() => {
+      document.querySelector('.loader').style.display = 'none'
     })
 
   addBackground(app)
