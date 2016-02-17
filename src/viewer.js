@@ -23,11 +23,12 @@ export default function(opt) {
 
   const app = loop(draw)
   const scene = new THREE.Scene()
-  const camera = new THREE.PerspectiveCamera(65, 1, 0.1, 1000)
+  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1)
   const controls = new OrbitControls(camera, canvas)
   camera.position.copy(new THREE.Vector3(0, 0, -1.6))
   camera.lookAt(new THREE.Vector3())
-
+  updateCamera()
+  
   app.render = renderer.render.bind(renderer, scene, camera)
 
   //render each frame unless user wants to do it manually
@@ -59,9 +60,22 @@ export default function(opt) {
     const size = { width, height }
 
     renderer.setSize(width, height)
-    camera.aspect = width / height
-    camera.updateProjectionMatrix()
+    updateCamera()
+    
+    // camera.aspect = width / height
     assign(app, size)
     app.emit('resize', size)
+  }
+  
+  function updateCamera () {
+    const width = window.innerWidth
+    const height = window.innerHeight
+    const aspectX = width > height ? (width / height) : 1
+    const aspectY = width > height ? 1 : (1 / (width / height))
+    camera.left = -1 * aspectX
+    camera.right = 1 * aspectX
+    camera.top = 1 * aspectY
+    camera.bottom = -1 * aspectY
+    camera.updateProjectionMatrix()
   }
 }
